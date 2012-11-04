@@ -17,5 +17,11 @@ function tmux-git() {
 function tmux-ssh() {
   tmux neww     -t $SESSION -a -n $2            "while true; do echo 'Press enter for connecting to $2'; read null; ssh $1; done"
 }
-
+tmux-mainwindow() {
+  tmux neww -t $SESSION -a -n main              "while true; do 
+      cat mainwindow-message
+      inotifywait mainwindow-message
+      done"
+  tmux splitw    -t $SESSION -a -n main         "bash --rc-file mainwindow.bashrc"
+}
 
