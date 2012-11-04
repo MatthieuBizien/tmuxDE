@@ -1,4 +1,7 @@
 Available functions:
+tmux-monitor [windowname]
+tmux-bash
+tmux-sudo
 tmux-opendir dir windowname
 tmux-git dir
 tmux-ssh user@domain windowname

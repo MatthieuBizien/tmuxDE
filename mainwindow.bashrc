@@ -1,3 +1,4 @@
 . /etc/bash.bashrc
 . /etc/bash_completion
-. tmux-functions
+. tmux-functions.sh
+cd

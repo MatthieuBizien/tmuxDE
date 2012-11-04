@@ -1,27 +1,45 @@
+function tmux-monitor() {
+ name=${2-monitor}
+ tmux neww      -a -n $name         'htop'
+ tmux splitw -v	  -p 70	 	'sudo iftop -i wlan0'
+ tmux splitw -v	  -p 50		'(echo "--nd."; cat -)|nmon'
+}
 function tmux-opendir() {
  name=${2-$1}
- tmux neww      -t $SESSION -a -n $name         "cd $1; bash"
+ tmux neww        -a -n $name         "cd $1; bash"
  tmux splitw    -h          -p 60               "cd $1; bash"
  tmux select-pane -L
- tmux splitw    -t $SESSION -p 50               "cd $1; bash"
+ tmux splitw      -p 50               "cd $1; bash"
  tmux select-pane -R
 }
 function tmux-git() {
  name=${2-git}
- tmux neww      -t $SESSION -a -n $name         "cd $1; ~/Code/sh/actualiseGitStatus.sh"
+ tmux neww        -a -n $name         "cd $1; ~/Code/sh/actualiseGitStatus.sh"
  tmux splitw    -h          -p 60               "cd $1; bash"
  tmux select-pane -L
- tmux splitw    -t $SESSION -p 50               "cd $1; ~/Code/sh/actualiseGitWhatchanged.sh"
+ tmux splitw      -p 50               "cd $1; ~/Code/sh/actualiseGitWhatchanged.sh"
  tmux select-pane -R
 }
-function tmux-ssh() {
-  tmux neww     -t $SESSION -a -n $2            "while true; do echo 'Press enter for connecting to $2'; read null; ssh $1; done"
+function tmux-bash() {
+ name=${2-bash}
+ tmux neww -a -n $name "bash"
+ tmux splitw -h "bash"
 }
-tmux-mainwindow() {
-  tmux neww -t $SESSION -a -n main              "while true; do 
-      cat mainwindow-message
-      inotifywait mainwindow-message
-      done"
-  tmux splitw    -t $SESSION -a -n main         "bash --rc-file mainwindow.bashrc"
+function tmux-sudo() {
+ name=${2-sudo}
+ tmux neww -a -n $name "sudo -s"
+ tmux splitw -h "sudo -s"
+}
+function tmux-ssh() {
+ name=${2-ssh}
+ tmux neww       -a -n $name         "ssh $1"
+}
+function tmux-mainwindow() {
+ tmux neww -a -n main              "while true; do
+     clear
+     cat $(dirname $0)/mainwindow-message
+     inotifywait -q $(dirname $0)/mainwindow-message
+     done"
+ tmux splitw   -p 70                           "cd $(dirname $0); bash --rcfile mainwindow.bashrc"
 }
 
