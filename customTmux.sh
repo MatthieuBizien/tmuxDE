@@ -48,17 +48,9 @@ tmux movew -t 666
 # Now populate the session with the windows you use every day
 tmux-mainwindow
 tmux movew -t 0
-tmux-ssh        root@griphee.com                griphee
-#tmux-ssh        famille@192.168.1.109           home
 tmux-monitor
 tmux-sudo
 tmux-bash
-#tmux-opendir    ~/Code/0x10c/0x10compress/      0x10compress
-#tmux-git        ~/Code/0x10c/0x10compress/
-#tmux-opendir    ~/Code/0x10c/0x10c-Macros/      0x10c-Macros
-#tmux-git        ~/Code/0x10c/0x10c-Macros/
-#tmux-opendir    ~/Code/sh/tmux/                 tmux
-#tmux-git        ~/Code/sh/tmux/
 
 # Bug fix : if removed, the final window have no name
 tmux neww "sleep 1"

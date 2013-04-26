@@ -1,3 +1,9 @@
+#
+# The functions available in the main window of tmux DE
+#
+
+DIRNAME=$(dirname "$0")
+
 function tmux-monitor() {
  name=${2-monitor}
  tmux neww      -a -n "$name"         'htop'
@@ -14,10 +20,10 @@ function tmux-opendir() {
 }
 function tmux-git() {
  name=${2-git}
- tmux neww        -a -n "$name"         "cd \"$1\"; ~/Code/sh/tmux/actualiseGitStatus.sh"
+ tmux neww        -a -n "$name"         "cd \"$1\"; $DIRNAME/actualiseGitStatus.sh"
  tmux splitw    -h          -p 60               "cd \"$1\"; bash"
  tmux select-pane -L
- tmux splitw      -p 50               "cd \"$1\"; ~/Code/sh/tmux/actualiseGitWhatchanged.sh"
+ tmux splitw      -p 50               "cd \"$1\"; $DIRNAME/actualiseGitWhatchanged.sh"
  tmux select-pane -R
 }
 function tmux-bash() {

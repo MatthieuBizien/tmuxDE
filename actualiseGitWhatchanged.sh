@@ -1,9 +1,9 @@
 #!/bin/sh
-#DIR='/tmp/matthieu/'$(cat /dev/urandom | tr -cd '[a-zA-Z0-9_]' |head -c 20)
+#DIR='/tmp/tmuxDE/'$(cat /dev/urandom | tr -cd '[a-zA-Z0-9_]' |head -c 20)
 #mkdir -p $DIR
 DIR=$(mktemp -d -t ACTUALISEGITWHATCHANGED.XXXXXXXXX)
 echo > $DIR/whatch
-while true; do 
+while true; do
    WIDTH=`stty size | cut -d ' ' -f 2`
    HEIGHT=`stty size | cut -d ' ' -f 1`
    git whatchanged --format='format:%Creset%h %C(ul)%an%Creset %ad%n%C(bold green)%s%C(yellow)' > $DIR/whatch1
